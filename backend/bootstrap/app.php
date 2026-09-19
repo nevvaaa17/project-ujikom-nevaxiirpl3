@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsPetugas;
+use App\Http\Middleware\IsPeminjam;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__ . '/../routes/web.php',
+        api: __DIR__ . '/../routes/api.php',
+        commands: __DIR__ . '/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            // Sesuaikan dengan nama yang kamu panggil di route:
+            'admin' => IsAdmin::class,
+            'petugas' => IsPetugas::class,
+            'peminjam' => IsPeminjam::class,
+            // Atau jika di route dipanggil role.admin, role.petugas, dst.
+            'role.admin' => IsAdmin::class,
+            'role.petugas' => IsPetugas::class,
+            'role.peminjam' => IsPeminjam::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
+    })->create();
