@@ -180,3 +180,78 @@ docker exec -it laravel-api php artisan make:request Alat/UpdateAlatRequest
 docker exec -it laravel-api php artisan make:controller API/AlatController --api 
 sudo chown -R $USER:$USER .
 docker exec -it laravel-api php artisan make:resource KategoriResource
+git status .
+git add .
+git comit -m "cetak laporan"
+git commit -m "cetak laporan"
+git push
+git push -u origin main
+git add .
+git commit -m "cetak laporan"
+git push
+git push --set-upstream origin main
+git pull origin main --rebase
+git push -u origin main
+git add .
+git commit -m "cetak laporan"
+git pull origin main --rebase
+git push -u origin main
+git add .
+git commit -m "cetak laporan"
+git pull origin main --rebase
+git add .
+git commit -m "cetak laporan"
+git pull origin main --rebase
+git push -u origin main
+git stash
+git pull origin main --rebase
+git stash pop
+git add .
+git commit -m "cetak laporan"
+git push -u origin main
+git push -u origin main --force
+git reset HEAD~1
+echo ".vscode-server/" >> .gitignore
+git add .
+git commit -m "cetak laporan"
+git push -u origin main --force
+rm -rf .git
+git init
+git remote add origin https://github.com/nevvaaa17/project-ujikom-nevaxiirpl3.git
+git branch -M main
+git add .
+git commit -m "cetak laporan"
+git push -u origin main --force
+rm -rf backend/.git
+git rm --cached backend
+git add backend/
+git commit -m "cetak laporan"
+git push origin main
+docker exec -it laravel-api php artisan make:resource UserResource
+docker exec -it laravel-api php artisan make:request User/StoreUserRequest
+docker exec -it laravel-api php artisan make:request User/UpdateUserRequest
+sudo chown -R $USER:$USER .
+docker exec -it laravel-api php artisan make:controller API/UserController --api 
+sudo chown -R $USER:$USER .
+docker exec -it laravel-api php artisan tinker
+docker exec -it laravel-api php artisan make:resource PeminjamanResource 
+docker exec -it laravel-api php artisan make:request Peminjaman/StorePeminjamanRequest 
+sudo chown -R $USER:$USER .
+docker exec -it laravel-api php artisan make:controller API/PeminjamanController --api 
+sudo chown -R $USER:$USER .
+php artisan tinker
+docker exec -it laravel-api php artisan make:request Pengembalian/StorePengembalianRequest 
+docker exec -it laravel-api php artisan make:request Pengembalian/UpdatePengembalianRequest 
+docker exec -it laravel-api php artisan make:controller API/PengembalianController --api 
+sudo chown -R $USER:$USER .
+php artisan config:clear
+php artisan tinker
+php artisan tinker
+docker exec -it laravel-api php artisan make:observer PeminjamanObserver --model=Peminjaman
+docker exec -it laravel-api php artisan make:observer PengembalianObserver --model=Pengembalian
+sudo chown -R $USER:$USER .
+docker exec -it laravel-api php artisan make:resource LogAktivitasResource 
+docker exec -it laravel-api php artisan make:controller API/LogAktivitasController  
+sudo chown -R $USER:$USER .
+docker exec -it laravel-api php artisan make:controller API/LaporanController --api 
+sudo chown -R $USER:$USER .

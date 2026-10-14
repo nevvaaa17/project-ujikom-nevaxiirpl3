@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard Admin')</title>
+    <title>@yield('title', 'Dashboard')</title>
     <!-- Memuat Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -13,8 +13,9 @@
 
         <!-- SIDEBAR -->
         <aside class="w-64 bg-gray-900 text-white flex flex-col hidden md:flex">
-            <div class="p-5 text-xl font-bold tracking-wider border-b border-gray-800">
-                PANEL ADMIN
+            <!-- Header Sidebar Dinamis -->
+            <div class="p-5 text-xl font-bold tracking-wider border-b border-gray-800 uppercase">
+                PANEL {{ auth()->user()->role }}
             </div>
             <nav class="flex-1 p-4 space-y-2">
                 

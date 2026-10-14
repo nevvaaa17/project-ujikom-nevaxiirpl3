@@ -7,11 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -22,7 +17,7 @@ class UserResource extends JsonResource
             'no_hp' => $this->no_hp,
             'alamat' => $this->alamat,
             'foto_profile' => $this->foto_profile ? url('storage/' . $this->foto_profile) : null,
-            'bergabung_sejak' => $this->created_at->format('Y-m-d'),
+            'bergabung_sejak' => $this->created_at?->format('Y-m-d'),
         ];
     }
 }

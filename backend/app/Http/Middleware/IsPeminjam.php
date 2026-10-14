@@ -11,11 +11,11 @@ class IsPeminjam
     /**
      * Handle an incoming request.
      *
-     * @param  Closure(Request): (Response)  $next
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $rsudo chown -R $USER $USER .equest->user()->role === 'peminjam') {
+        if ($request->user() && $request->user()->role === 'peminjam') {
             return $next($request);
         }
 
