@@ -10,7 +10,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Admin (Menggunakan alias middleware 'admin')
+// ==================== ROUTE TAMU (Belum Login: Login & Register) ====================
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+    // Route Registrasi untuk Web
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+// Route Logout (Harus sudah login)
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+
+// =========================
+// Admin Routes
+// =========================
 Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->name('admin.')
@@ -121,35 +137,39 @@ Route::middleware(['auth', 'admin'])
             ->name('pengembalian.destroy');
     });
 
-// Petugas (Menggunakan alias middleware 'petugas')
-Route::middleware(['auth', 'petugas'])->prefix('petugas')->name('petugas.')->group(function () {
-    // Peminjaman & Persetujuan
-    Route::get('/peminjaman', [PetugasController::class, 'indexPeminjaman'])->name('peminjaman.index');
-    Route::post('/peminjaman/{id}/setujui', [PetugasController::class, 'setujuiPeminjaman'])->name('peminjaman.setujui');
-    Route::post('/peminjaman/{id}/tolak', [PetugasController::class, 'tolakPeminjaman'])->name('peminjaman.tolak');
 
-    // Pengembalian & Denda
-    Route::post('/pengembalian/{id}', [PetugasController::class, 'prosesPengembalian'])->name('pengembalian.proses');
-    Route::get('/pengembalian', [PetugasController::class, 'indexPengembalian'])->name('pengembalian.index');
+// =========================
+// Petugas Routes
+// =========================
+Route::middleware(['auth', 'petugas'])
+    ->prefix('petugas')
+    ->name('petugas.')
+    ->group(function () {
+        // Peminjaman & Persetujuan
+        Route::get('/peminjaman', [PetugasController::class, 'indexPeminjaman'])->name('peminjaman.index');
+        Route::post('/peminjaman/{id}/setujui', [PetugasController::class, 'setujuiPeminjaman'])->name('peminjaman.setujui');
+        Route::post('/peminjaman/{id}/tolak', [PetugasController::class, 'tolakPeminjaman'])->name('peminjaman.tolak');
 
-    // Laporan
-    Route::get('/laporan', [PetugasController::class, 'laporan'])->name('laporan.index');
-    Route::get('/laporan/cetak', [PetugasController::class, 'cetakLaporan'])->name('laporan.cetak');
-});
+        // Pengembalian & Denda
+        Route::post('/pengembalian/{id}', [PetugasController::class, 'prosesPengembalian'])->name('pengembalian.proses');
+        Route::get('/pengembalian', [PetugasController::class, 'indexPengembalian'])->name('pengembalian.index');
 
-// Peminjam (Menggunakan alias middleware 'peminjam')
-Route::middleware(['auth', 'peminjam'])->prefix('peminjam')->name('peminjam.')->group(function () {
-    // Katalog & Pengajuan
-    Route::get('/katalog', [PeminjamController::class, 'katalogAlat'])->name('katalog');
-    Route::post('/peminjaman/ajukan', [PeminjamController::class, 'ajukanPeminjaman'])->name('peminjaman.ajukan');
-    Route::get('/riwayat', [PeminjamController::class, 'riwayatPeminjaman'])->name('riwayat');
-});
+        // Laporan
+        Route::get('/laporan', [PetugasController::class, 'laporan'])->name('laporan.index');
+        Route::get('/laporan/cetak', [PetugasController::class, 'cetakLaporan'])->name('laporan.cetak');
+    });
 
-// Route Tamu (Belum Login)
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
-});
 
-// Route Logout (Harus sudah login)
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+// =========================
+// Peminjam Routes
+// =========================
+Route::middleware(['auth', 'peminjam'])
+    ->prefix('peminjam')
+    ->name('peminjam.')
+    ->group(function () {
+        // Katalog, Pengajuan, Riwayat, & Pengembalian Alat
+        Route::get('/katalog', [PeminjamController::class, 'katalogAlat'])->name('katalog');
+        Route::post('/peminjaman/ajukan', [PeminjamController::class, 'ajukanPeminjaman'])->name('peminjaman.ajukan');
+        Route::get('/riwayat', [PeminjamController::class, 'riwayatPeminjaman'])->name('riwayat');
+        Route::post('/peminjaman/kembalikan/{id}', [PeminjamController::class, 'kembalikanAlat'])->name('peminjaman.kembalikan');
+    });

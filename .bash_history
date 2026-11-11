@@ -255,3 +255,6 @@ docker exec -it laravel-api php artisan make:controller API/LogAktivitasControll
 sudo chown -R $USER:$USER .
 docker exec -it laravel-api php artisan make:controller API/LaporanController --api 
 sudo chown -R $USER:$USER .
+git add .
+git commit -m "cetak laporan"
+git push
